@@ -1,0 +1,226 @@
+[gd_scene format=3 uid="uid://bdql5q88gk8u2"]
+
+[ext_resource type="Texture2D" uid="uid://t07fwwg8kivu" path="res://Resources/Gemini_Generated_Image_d7z3pnd7z3pnd7z3.png" id="1_872mj"]
+[ext_resource type="PackedScene" uid="uid://breh81po17qss" path="res://Scene/robot_arm.tscn" id="2_872mj"]
+[ext_resource type="Script" uid="uid://b4j4iwh0dwrjp" path="res://Script/ItemSpawn.gd" id="3_knv7s"]
+[ext_resource type="PackedScene" uid="uid://bdae4ma3yxqas" path="res://Scene/blue_box.tscn" id="4_3cyws"]
+[ext_resource type="PackedScene" uid="uid://c4ncoblvpkl14" path="res://Scene/red_box.tscn" id="5_riu2e"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_knv7s"]
+font_size = 80
+outline_size = 10
+outline_color = Color(0, 1, 0.8862745, 1)
+shadow_size = 20
+shadow_color = Color(0, 0, 1, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3cyws"]
+font_size = 48
+outline_size = 10
+outline_color = Color(1, 1, 0, 1)
+shadow_size = 20
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jtteh"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iigix"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ib10u"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m6wtb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_872mj"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dyu6y"]
+
+[sub_resource type="Curve3D" id="Curve3D_iigix"]
+_data = {
+"points": PackedVector3Array(0.00054597855, 0.01841867, -0.22011718, -0.00054597855, -0.01841867, 0.22011718, -0.058740616, 0, -0.076997854, -0.075401306, -0.08365023, -2.9810138, 0.075401306, 0.08365023, 2.9810138, -0.08345389, 0.10215652, 4.7689714, -0.07168865, 0.016468763, 2.91677, 0.07168865, -0.016468763, -2.91677, 6.7280836, 0.04121399, 4.3704896, 0, 0, 0, 0, 0, 0, 6.758437, 0, 0.03475919),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="Node3D" type="Node3D" unique_id=928423187]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=883457612]
+
+[node name="TouchScreenButton" type="Button" parent="CanvasLayer" unique_id=1041266165]
+anchors_preset = -1
+anchor_left = 0.77800006
+anchor_top = 0.671
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.25604248
+offset_top = 0.19198608
+grow_horizontal = 0
+grow_vertical = 0
+icon = ExtResource("1_872mj")
+flat = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="SwipeZone" type="ColorRect" parent="CanvasLayer" unique_id=942192678]
+self_modulate = Color(1, 1, 1, 0.17254902)
+anchors_preset = -1
+anchor_left = 0.0050000004
+anchor_top = 0.83800006
+anchor_right = 0.36900002
+anchor_bottom = 1.0
+offset_left = 0.23999977
+offset_top = -0.024047852
+offset_right = -0.088012695
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.44, 0, 0, 1)
+
+[node name="PauseButton" type="Button" parent="CanvasLayer" unique_id=1382846693]
+anchors_preset = -1
+anchor_right = 0.076000005
+anchor_bottom = 0.11000001
+offset_right = 0.44799805
+offset_bottom = -0.2800064
+text = "||"
+
+[node name="StopMenu" type="Panel" parent="CanvasLayer" unique_id=377292791]
+process_mode = 2
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = -2.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="CanvasLayer/StopMenu" unique_id=1838101842]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 348.0
+offset_top = 159.0
+offset_right = -383.0
+offset_bottom = -357.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="CanvasLayer/StopMenu" unique_id=775874878]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 348.0
+offset_top = 322.0
+offset_right = -383.0
+offset_bottom = -194.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Restart"
+
+[node name="PauseLabel" type="Label" parent="CanvasLayer/StopMenu" unique_id=576787746]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 3.0
+offset_bottom = -540.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Pause Menu"
+label_settings = SubResource("LabelSettings_knv7s")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer" unique_id=1217811154]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_top = 2.0
+offset_right = 135.5
+offset_bottom = 69.0
+grow_horizontal = 2
+text = "Score: 0"
+label_settings = SubResource("LabelSettings_3cyws")
+horizontal_alignment = 1
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1086703556]
+transform = Transform3D(0.9999751, 0.0060529863, -0.0036449612, 0.0038466458, -0.033649437, 0.9994263, 0.005926863, -0.9994154, -0.03367188, -1.1680148, 4.4379697, 5.870391)
+fov = 95.3802
+
+[node name="RobotArm" parent="." unique_id=1652485373 node_paths=PackedStringArray("stop_menu", "score_label") instance=ExtResource("2_872mj")]
+transform = Transform3D(0.031708356, 0, 0.9994973, 0, 1, 0, -0.9994973, 0, 0.031708356, -0.78689194, -0.710068, 8.376236)
+stop_menu = NodePath("../CanvasLayer/StopMenu")
+score_label = NodePath("../CanvasLayer/ScoreLabel")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=796636455]
+transform = Transform3D(1, 0, 0, 0, 0.9647867, 0.26303345, 0, -0.26303345, 0.9647867, 0, 1.5262649, 3.7535925)
+
+[node name="Collector_01" type="CSGMesh3D" parent="." unique_id=1762751460]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, -4.2854805, -1.258728, 8.33494)
+use_collision = true
+mesh = SubResource("BoxMesh_jtteh")
+material = SubResource("StandardMaterial3D_iigix")
+
+[node name="Area3D" type="Area3D" parent="Collector_01" unique_id=1794772189]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collector_01/Area3D" unique_id=1635537091]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4582548, 0, 0)
+shape = SubResource("BoxShape3D_ib10u")
+
+[node name="Collector_02" type="CSGMesh3D" parent="." unique_id=1522772164]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.4465678, -1.258728, 8.283994)
+use_collision = true
+mesh = SubResource("BoxMesh_m6wtb")
+material = SubResource("StandardMaterial3D_872mj")
+
+[node name="Area3D" type="Area3D" parent="Collector_02" unique_id=1494247797]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Collector_02/Area3D" unique_id=1249478882]
+shape = SubResource("BoxShape3D_dyu6y")
+
+[node name="URoller" type="Node3D" parent="." unique_id=936284798]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8409233, -1.7464905, 0)
+
+[node name="Path3D" type="Path3D" parent="URoller" unique_id=505370650]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.25145388)
+curve = SubResource("Curve3D_iigix")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="URoller/Path3D" unique_id=2116719743]
+polygon = PackedVector2Array(0.6, 0, 0.6, 0.1, -0.6, 0.1, -0.6, 0)
+mode = 2
+path_node = NodePath("..")
+path_interval_type = 0
+path_interval = 0.15
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = true
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="ItemSpawner" type="Marker3D" parent="URoller" unique_id=699074226 node_paths=PackedStringArray("path_3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.47198486, 0)
+script = ExtResource("3_knv7s")
+item_scene_1 = ExtResource("4_3cyws")
+item_scene_2 = ExtResource("5_riu2e")
+path_3d = NodePath("../Path3D")
+
+[node name="Timer" type="Timer" parent="URoller/ItemSpawner" unique_id=1561254422]
+wait_time = 2.0
+autostart = true
+
+[connection signal="pressed" from="CanvasLayer/TouchScreenButton" to="RobotArm" method="_on_touch_screen_button_pressed"]
+[connection signal="gui_input" from="CanvasLayer/SwipeZone" to="RobotArm" method="_on_swipe_zone_gui_input"]
+[connection signal="pressed" from="CanvasLayer/PauseButton" to="RobotArm" method="_on_pause_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/StopMenu/ResumeButton" to="RobotArm" method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/StopMenu/RestartButton" to="RobotArm" method="_on_restart_button_pressed"]
+[connection signal="body_entered" from="Collector_01/Area3D" to="RobotArm" method="_on_area_3d_body_entered"]
+[connection signal="body_entered" from="Collector_02/Area3D" to="RobotArm" method="_on_area_3d_body_red_entered"]

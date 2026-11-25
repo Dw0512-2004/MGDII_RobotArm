@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bdae4ma3yxqas"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_wnefm"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knv7s"]
+albedo_color = Color(0, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m6wtb"]
+size = Vector3(0.9748535, 1, 1)
+
+[node name="Blue Box" type="RigidBody3D" unique_id=796615595 groups=["Blue"]]
+collision_mask = 6
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=30239324]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26340365, 0, 0)
+mesh = SubResource("BoxMesh_wnefm")
+surface_material_override/0 = SubResource("StandardMaterial3D_knv7s")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1994127916]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.26696765, 0, 0)
+shape = SubResource("BoxShape3D_m6wtb")

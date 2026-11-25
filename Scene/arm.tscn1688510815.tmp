@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://bdql5q88gk8u2"]
+
+[ext_resource type="Texture2D" uid="uid://t07fwwg8kivu" path="res://Resources/Gemini_Generated_Image_d7z3pnd7z3pnd7z3.png" id="1_872mj"]
+[ext_resource type="PackedScene" uid="uid://breh81po17qss" path="res://Scene/robot_arm.tscn" id="2_872mj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jtteh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jtteh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_m6wtb"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dyu6y"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ib10u"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jtteh"]
+
+[node name="Node3D" type="Node3D" unique_id=928423187]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=883457612]
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="CanvasLayer" unique_id=1277755413]
+position = Vector2(852, 360)
+scale = Vector2(2.3359375, 2.1953125)
+texture_normal = ExtResource("1_872mj")
+shape = SubResource("CircleShape2D_jtteh")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1086703556]
+transform = Transform3D(-0.9810194, -0.07530016, 0.17869242, -0.03497384, 0.9751193, 0.21890476, -0.19072996, 0.20850024, -0.95924443, 1.291822, 1.6127135, -3.712088)
+
+[node name="RobotArm" parent="." unique_id=1652485373 instance=ExtResource("2_872mj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8709489, 0, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=796636455]
+transform = Transform3D(1, 0, 0, 0, 0.9647867, 0.26303345, 0, -0.26303345, 0.9647867, 0, 1.5262649, 3.7535925)
+
+[node name="Collector_01" type="CSGMesh3D" parent="." unique_id=1762751460]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0.061107635, 0, -2.2320795)
+use_collision = true
+mesh = SubResource("BoxMesh_jtteh")
+
+[node name="Collector_02" type="CSGMesh3D" parent="." unique_id=1522772164]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 2.462681, 0, -2.2040548)
+use_collision = true
+mesh = SubResource("BoxMesh_m6wtb")
+
+[node name="Roller" type="CSGMesh3D" parent="." unique_id=1329028343]
+transform = Transform3D(1.5, 0, 0, 0, 0.1, 0, 0, 0, 10, 1.2687871, 0, 2.2492304)
+use_collision = true
+mesh = SubResource("BoxMesh_dyu6y")
+
+[node name="Test" type="RigidBody3D" parent="." unique_id=132317008]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 1.3690004, 0.92927027, 2.534245)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Test" unique_id=925146760]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("BoxMesh_ib10u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Test" unique_id=1813658205]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_jtteh")
+
+[connection signal="pressed" from="CanvasLayer/TouchScreenButton" to="RobotArm" method="_on_touch_screen_button_pressed"]

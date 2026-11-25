@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://breh81po17qss"]
+
+[ext_resource type="Script" uid="uid://b0wea5nkoggd" path="res://Script/Robot_Arm.gd" id="1_wudm8"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jtteh"]
+top_radius = 0.3305664
+bottom_radius = 0.3305664
+height = 1.2602539
+
+[sub_resource type="BoxMesh" id="BoxMesh_jtteh"]
+size = Vector3(0.5670166, 0.64367676, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_jtteh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jtteh"]
+
+[sub_resource type="Animation" id="Animation_513mx"]
+resource_name = "Grab_Down"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseMesh/ShoulderJoint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.32, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.3926991), Vector3(0, 0, -0.6021386), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_wudm8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseMesh/ShoulderJoint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tuh0h"]
+_data = {
+&"Grab_Down": SubResource("Animation_513mx"),
+&"RESET": SubResource("Animation_wudm8")
+}
+
+[node name="RobotArm" type="Node3D" unique_id=1652485373]
+script = ExtResource("1_wudm8")
+
+[node name="BaseMesh" type="MeshInstance3D" parent="." unique_id=1144188725]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.36987305, 0)
+mesh = SubResource("CylinderMesh_jtteh")
+
+[node name="ShoulderJoint" type="Node3D" parent="BaseMesh" unique_id=1061706339]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0765857, 0)
+
+[node name="ArmMesh" type="MeshInstance3D" parent="BaseMesh/ShoulderJoint" unique_id=551950477]
+transform = Transform3D(2.9947114, 0, 0, 0, 1, 0, 0, 0, 1, 0.36960548, -0.17816162, 0)
+mesh = SubResource("BoxMesh_jtteh")
+
+[node name="ClawJoint" type="Node3D" parent="BaseMesh/ShoulderJoint" unique_id=64928903]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.427679, 0, 0)
+
+[node name="ClawMesh" type="MeshInstance3D" parent="BaseMesh/ShoulderJoint/ClawJoint" unique_id=234429570]
+transform = Transform3D(-0.0042407825, 0.999991, 0, -0.999991, -0.0042407825, 0, 0, 0, 1, -0.83270764, -0.1761775, 0)
+mesh = SubResource("PrismMesh_jtteh")
+
+[node name="GrabArea" type="Area3D" parent="BaseMesh/ShoulderJoint/ClawJoint" unique_id=1097861950]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.268848, -0.19544435, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseMesh/ShoulderJoint/ClawJoint/GrabArea" unique_id=1988875601]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.44183016, 0, 0)
+shape = SubResource("BoxShape3D_jtteh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1783928114]
+libraries/ = SubResource("AnimationLibrary_tuh0h")

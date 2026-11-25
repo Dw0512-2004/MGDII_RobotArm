@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://breh81po17qss"]
+
+[ext_resource type="Script" uid="uid://b0wea5nkoggd" path="res://Script/Robot_Arm.gd" id="1_wudm8"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_jtteh"]
+top_radius = 0.40722656
+bottom_radius = 0.40722656
+height = 2.4685364
+
+[sub_resource type="BoxMesh" id="BoxMesh_jtteh"]
+size = Vector3(0.59942627, 0.64367676, 0.5145874)
+
+[sub_resource type="PrismMesh" id="PrismMesh_jtteh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jtteh"]
+size = Vector3(1.7751465, 1, 1)
+
+[sub_resource type="Animation" id="Animation_513mx"]
+resource_name = "Grab_Down"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseMesh/ShoulderJoint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.6021386), Vector3(0, 0, 0)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"trigger_grab_check"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_wudm8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BaseMesh/ShoulderJoint:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tuh0h"]
+_data = {
+&"Grab_Down": SubResource("Animation_513mx"),
+&"RESET": SubResource("Animation_wudm8")
+}
+
+[node name="RobotArm" type="Node3D" unique_id=1652485373 node_paths=PackedStringArray("grab_area", "hold_point")]
+script = ExtResource("1_wudm8")
+grab_area = NodePath("BaseMesh/ShoulderJoint/ClawJoint/GrabArea")
+hold_point = NodePath("BaseMesh/ShoulderJoint/ClawJoint/GrabPoint")
+
+[node name="BaseMesh" type="MeshInstance3D" parent="." unique_id=1144188725]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.23426819, 0)
+mesh = SubResource("CylinderMesh_jtteh")
+
+[node name="ShoulderJoint" type="Node3D" parent="BaseMesh" unique_id=1061706339]
+transform = Transform3D(1.4476095, 0, 0, 0, 0.91025823, 0, 0, 0, 1, 0.3672682, 1.5552187, 0)
+
+[node name="ArmMesh" type="MeshInstance3D" parent="BaseMesh/ShoulderJoint" unique_id=551950477]
+transform = Transform3D(2.9947114, 0, 0, 0, 1.0000004, 0, 0, 0, 1, 0.3210767, -0.17816162, 0.045318604)
+mesh = SubResource("BoxMesh_jtteh")
+
+[node name="ClawJoint" type="Node3D" parent="BaseMesh/ShoulderJoint" unique_id=64928903]
+transform = Transform3D(0.59032094, 0, 0, 0, 1.0000004, 0, 0, 0, 1, 2.181076, 0, 0)
+
+[node name="ClawMesh" type="MeshInstance3D" parent="BaseMesh/ShoulderJoint/ClawJoint" unique_id=234429570]
+transform = Transform3D(-0.004231352, 1.7907301, 0, -0.99776727, -0.007594166, 0, 0, 0, 1, -0.8327079, -0.17617738, 0.07353258)
+mesh = SubResource("PrismMesh_jtteh")
+
+[node name="GrabArea" type="Area3D" parent="BaseMesh/ShoulderJoint/ClawJoint" unique_id=1097861950]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2688481, -0.19544435, 0)
+collision_layer = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BaseMesh/ShoulderJoint/ClawJoint/GrabArea" unique_id=1988875601]
+transform = Transform3D(0.9999954, 0, 0, 0, 1, 0, 0, 0, 0.9999972, 0.4351158, 0, 0)
+shape = SubResource("BoxShape3D_jtteh")
+
+[node name="GrabPoint" type="Marker3D" parent="BaseMesh/ShoulderJoint/ClawJoint" unique_id=1296966201]
+transform = Transform3D(0.0016048814, -0.99999905, 0, 0.99999887, 0.0016048558, 0, 0, 0, 1, 0.040875435, -0.22383451, 0.0068196207)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1783928114]
+libraries/ = SubResource("AnimationLibrary_tuh0h")
